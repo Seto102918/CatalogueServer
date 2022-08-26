@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    padding: 0.25rem;
+    border: none;
+    border-radius: 10px;
+}
+
+.add_div{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.addForm{
+    height: 30rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: lightgray;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+}
+
+.addForm>div{
+    margin: 0.5rem;
+}
+
+.div_1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.div_1>label{
+    margin-inline: 0.5rem;
+}
+.submitButton{
+    height: 2rem;
+}
+
+.Home_Title{
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0 1rem 0;
+}
+
+#calendar{
+    margin-inline: 2rem;
+    margin-bottom: 2rem;
+}
+
+.new-Form{
+    position: absolute;
+    background-color: lightgray;
+    z-index: 100;
+    border-radius: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.new-Form>form{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.new-Form>form>input, textarea {
+   margin-bottom: 1rem;
+   padding: 0.5rem;
+}
+
+#note{
+}
+
+.favorit_radio_input{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.favorit_radio_input > div > input {
+    margin: 0.5rem;
+}
+
+
