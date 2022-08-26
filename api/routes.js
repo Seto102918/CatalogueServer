@@ -10,15 +10,14 @@ import deleteFromDrive from "./delete.js";
 const upload = multer();
 const router = express.Router();
 
-router.get('/', (req,res) => res.render('home'))
-
 /* Edit From Admin Site */
-router.post('/edit', upload.any(), (req, res) => {
+router.post('/admin/edit', upload.any(), (req, res) => {
     gownCtrl.apiEditGaun(req, res);
 });
 
-router.post('/upload', upload.any(), async (req, res) => {
+router.post('/admin/upload', upload.any(), async (req, res) => {
     try {
+        console.log(req)
         const { body, files } = req;
         const IdArray = [];
         for (let i = 0; i < files.length; i++) {
@@ -29,8 +28,9 @@ router.post('/upload', upload.any(), async (req, res) => {
     } catch (err) { res.send(err.message); }
 });
 
-router.post('/delete', async (req, res) => {
+router.post('/admin/delete', async (req, res) => {
     try {
+        console.log(req)
         //get id foto di drive + delete
         let returned = await gownCtrl.apiCheckId(req, res)
         let drive = returned.gown[0].drive;
@@ -45,17 +45,9 @@ router.post('/delete', async (req, res) => {
     }
 })
 
-router.route("/v1/gown").get(gownCtrl.apiGetGown)
-router.route("/v1/gown/id/:id").get(gownCtrl.apiGetGownById)
-router.route("/v1/gown/kode/:kode").get(gownCtrl.apiGetGownKode)
-router.route("/v1/gown/list_warna").get(gownCtrl.apiGetGownListColor)
-
-router.get('/calendar', (req,res)=>{
-    const calendarJSON = require('../public/static/api/calendar.json')
-    res.json(calendarJSON)
-})
-
-router.post('/calendar/new', (req,res)=>{console.log(req.body)})
-
+router.route("/api/v1/gown").get(gownCtrl.apiGetGown)
+router.route("/api/v1/gown/id/:id").get(gownCtrl.apiGetGownById)
+router.route("/api/v1/gown/kode/:kode").get(gownCtrl.apiGetGownKode)
+router.route("/api/v1/gown/list_warna").get(gownCtrl.apiGetGownListColor)
 
 export default router
