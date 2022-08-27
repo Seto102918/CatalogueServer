@@ -38,7 +38,7 @@ export default class gownController {
 
     static async apiGetGownById(req, res, next) {
         try {
-            if(req.params.id == "") return
+            if (req.params.id == "") return
             const gownData = await gownDAO.getGownByID(req.params.id)
             if (!gownData) return res.status(404).json({ error: "Not found" })
             res.json(gownData)
@@ -51,9 +51,8 @@ export default class gownController {
     static async apiGetGownKode(req, res, next) {
         try {
             let input = req.params.kode || {};
-            let kode = await gownDAO.getKode(input);
-            let id = kode._id.toString();
-            res.redirect(`/v1/gown/id/${id}`);
+            let { gownFound, recommended } = await gownDAO.getKode(input);
+            res.json({ gownFound, recommended }).status(200);
         } catch (e) {
             console.log(`api, ${e}`)
             res.status(500).json({ error: e })
@@ -66,7 +65,7 @@ export default class gownController {
             const warna = req.body.warna;
             const harga = parseInt(req.body.harga);
             const kategori = req.body.kategori;
-            
+
             const favorit = req.body.favorit == "true" ? true : false
 
             const GaunResponse = await gownDAO.addGaun(
@@ -78,9 +77,9 @@ export default class gownController {
                 drive
             )
 
-            res.json({ status: "success" , res : GaunResponse })
-        } catch (e) { 
-            res.json({ error: e.message }) 
+            res.json({ status: "success", res: GaunResponse })
+        } catch (e) {
+            res.json({ error: e.message })
         }
     }
 
@@ -97,18 +96,18 @@ export default class gownController {
             let addArray = [];
             let changeArray = [];
             files.forEach(el => {
-                if(el.fieldname == 'add') {
+                if (el.fieldname == 'add') {
                     addArray.push(el);
                 } else changeArray.push(el);
             })
-    
+
             // Check ID Input VS InDatabase
             let returned = await gownCtrl.apiCheckId(req, res)
             let drive = returned.gown[0].drive;
-    
+
             // delete dari drive terus ganti sm yang baru
-            for (let i = 0; i < changeArray.length; i++){
-                const changeIndex = changeArray[i].fieldname[changeArray[i].fieldname.length-1];
+            for (let i = 0; i < changeArray.length; i++) {
+                const changeIndex = changeArray[i].fieldname[changeArray[i].fieldname.length - 1];
                 await deleteFromDrive(drive[changeIndex]); //delete
                 const Id = await uploadFile(changeArray[i], body.kode, changeIndex); //upload
                 drive[changeIndex] = Id;
@@ -121,7 +120,7 @@ export default class gownController {
             const kode = req.body.kode;
             const warna = req.body.warna;
             const harga = parseInt(req.body.harga);
-            const favorit = req.body.favorit == "true" ? true : false ;
+            const favorit = req.body.favorit == "true" ? true : false;
 
             const GaunResponse = await gownDAO.editGaun(
                 kode,
@@ -132,7 +131,7 @@ export default class gownController {
                 returned.gown
             );
 
-            res.json({ status: "success" , res : GaunResponse });
+            res.json({ status: "success", res: GaunResponse });
         } catch (e) {
             res.status(500).json({ error: e.message })
         }
@@ -147,7 +146,7 @@ export default class gownController {
         }
     }
 
-    static async apiDelete(req,res) {
+    static async apiDelete(req, res) {
         try {
             const Response = await gownDAO.delete(req.body.id);
             return Response

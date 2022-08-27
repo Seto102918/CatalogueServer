@@ -1,5 +1,6 @@
 import express from "express"
 import { createRequire } from "module";
+import path from "path";
 const require = createRequire(import.meta.url); 
 import multer from 'multer';
 
@@ -9,6 +10,11 @@ import deleteFromDrive from "./delete.js";
 
 const upload = multer();
 const router = express.Router();
+
+router.post('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 
 /* Edit From Admin Site */
 router.post('/admin/edit', upload.any(), (req, res) => {
