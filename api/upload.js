@@ -1,7 +1,7 @@
 import stream from 'stream';
 import getDriveService from './service.js';
 
-const uploadFile = async (fileObject, kodeFoto , indexFoto ) => {
+const uploadFile = async (fileObject, kodeFoto, indexFoto) => {
     const driveService = await getDriveService();
 
     const bufferStream = new stream.PassThrough();

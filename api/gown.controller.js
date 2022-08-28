@@ -54,7 +54,6 @@ export default class gownController {
             let { gownFound, recommended } = await gownDAO.getKode(input);
             res.json({ gownFound, recommended }).status(200);
         } catch (e) {
-            console.log(`api, ${e}`)
             res.status(500).json({ error: e })
         }
     }
