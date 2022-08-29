@@ -1,11 +1,12 @@
-import * as fs from 'fs'
-import mongodb from "mongodb"
-import dotenv from "dotenv"
-import express from "express"
-import cors from "cors"
-import path from 'path'
+import * as fs from 'fs';
+import mongodb from "mongodb";
+import dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import path from 'path';
 import { fileURLToPath } from 'url';
-import { engine } from 'express-handlebars'
+import { engine } from 'express-handlebars';
+import compression from 'compression';
 dotenv.config()
 
 const app = express();
@@ -38,7 +39,6 @@ app.use(express.urlencoded({ extended: true }))
 
 import RoutesApi from "./api/routesApi.js"
 import RoutesAdmin from "./api/routesAdmin.js"
-import e from 'express'
 
 const indexPath = path.join(__dirname, 'build', 'index.html');
 
