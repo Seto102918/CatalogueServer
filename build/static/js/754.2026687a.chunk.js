@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkclient=self.webpackChunkclient||[]).push([[754],{3754:function(e,n,s){s.r(n);var c=s(184);n.default=function(){return(0,c.jsxs)("div",{children:[(0,c.jsx)("h1",{children:"404"}),(0,c.jsx)("h3",{children:"Page Doesn't Exist"})]})}}}]);
-//# sourceMappingURL=754.2026687a.chunk.js.map

@@ -1,12 +1,11 @@
-
-import uploadFile from "./upload.js";
 import deleteFromDrive from "./delete.js";
 
 import express from "express"
 import multer from 'multer';
 
 import gownCtrl from "./gown.controller.js"
-import path from "path";
+import convert2webp from "./convert2webp.js";
+import uploadFile from "./upload.js";
 
 const upload = multer();
 const routerAdmin = express.Router();
@@ -20,6 +19,7 @@ routerAdmin.post('/upload', upload.any(), async (req, res) => {
     try {
         console.log(req)
         const { body, files } = req;
+        console.log(files)
         const IdArray = [];
         for (let i = 0; i < files.length; i++) {
             const Id = await uploadFile(files[i], body.kode, i);
