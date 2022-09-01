@@ -89,6 +89,7 @@ export default class gownController {
 
     static async apiEditGaun(req, res, gownRef, drive) {
         try {
+            console.log(req.body)
             const { body, files } = req;
 
             // Pisahin Add sm Change
