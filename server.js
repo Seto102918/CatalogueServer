@@ -37,8 +37,6 @@ app.use(express.static(path.join(__dirname, 'build'), {
 	},
 }));
 
-app.use(express.static(path.join(__dirname, 'public/static/home')))
-
 import RoutesApi from "./api/routesApi.js"
 import RoutesAdmin from "./api/routesAdmin.js"
 
