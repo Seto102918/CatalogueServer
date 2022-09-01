@@ -53,6 +53,7 @@ export default class gownDAO {
 			return { gownList: [], totalNumgown: 0 }
 		}
 
+		console.log(GownPerPage)
 		const displayCursor = cursor.limit(GownPerPage).skip(GownPerPage * page)
 
 		try {
