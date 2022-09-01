@@ -10,11 +10,11 @@ export default class gownDAO {
 	}
 
 	static async getGown({
-		filters = null,
-		page = 0,
-		GownPerPage = 0,
-		sort = null,
-		kategori = null
+		filters,
+		page,
+		GownPerPage,
+		sort,
+		kategori
 	} = {}) {
 
 		let filterArray = [];
