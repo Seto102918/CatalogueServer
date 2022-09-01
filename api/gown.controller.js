@@ -2,7 +2,7 @@ import gownDAO from "../dao/gownDAO.js"
 
 export default class gownController {
     static async apiGetGown(req, res, next) {
-        const gownPerPage = req.query.gownPerPage ? parseInt(req.query.gownPerPage) : 20
+        const gownPerPage = req.query.gownPerPage ? parseInt(req.query.gownPerPage, 10) : 20
         console.log(gownPerPage)
         const page = req.query.page ? parseInt(req.query.page, 10) : 0
         const sort = req.query.sort;

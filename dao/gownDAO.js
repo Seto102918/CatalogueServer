@@ -10,11 +10,11 @@ export default class gownDAO {
 	}
 
 	static async getGown({
-		filters,
-		page,
-		GownPerPage,
-		sort,
-		kategori
+		filters = null,
+		page = 0,
+		gownPerPage = 20,
+		sort = null,
+		kategori = null
 	} = {}) {
 
 		let filterArray = [];
@@ -53,13 +53,13 @@ export default class gownDAO {
 			return { gownList: [], totalNumgown: 0 }
 		}
 
-		console.log(GownPerPage)
-		const displayCursor = cursor.limit(GownPerPage).skip(GownPerPage * page)
+		console.log(gownPerPage)
+		const displayCursor = cursor.limit(gownPerPage).skip(gownPerPage * page)
 
 		try {
 			const gownList = await displayCursor.toArray()
 			const totalNumgown = await gown.countDocuments(query)
-			const totalPages = totalNumgown / GownPerPage;
+			const totalPages = totalNumgown / gownPerPage;
 
 			return { gownList, totalNumgown, totalPages }
 		} catch (e) {
