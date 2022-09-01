@@ -4,7 +4,6 @@ import express from "express"
 import multer from 'multer';
 
 import gownCtrl from "./gown.controller.js"
-import convert2webp from "./convert2webp.js";
 import uploadFile from "./upload.js";
 
 const upload = multer();
