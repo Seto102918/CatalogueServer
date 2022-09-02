@@ -102,7 +102,7 @@ export default class gownController {
             })
 
             // Check ID Input VS InDatabase
-            let returned = await gownCtrl.apiCheckId(req, res)
+            let returned = await gownDAO.checkId(req.body.kode);
             let drive = returned.gown[0].drive;
 
             // delete dari drive terus ganti sm yang baru
