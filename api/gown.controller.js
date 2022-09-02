@@ -133,6 +133,7 @@ export default class gownController {
 
             res.json({ status: "success", res: GaunResponse });
         } catch (e) {
+            console.log(e.message)
             res.status(500).json({ error: e.message })
         }
     }
