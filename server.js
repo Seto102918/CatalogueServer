@@ -39,14 +39,12 @@ app.use(express.static(path.join(__dirname, 'build'), {
 	},
 }));
 
-app.get('/*', function (req, res) {
+app.get('/', function (req, res) {
 	res.sendFile(indexPath);
 });
 
 import RoutesApi from "./api/routesApi.js"
 import RoutesAdmin from "./api/routesAdmin.js"
-
-
 
 app.use("/api/", RoutesApi)
 app.use("/admin/", RoutesAdmin)
