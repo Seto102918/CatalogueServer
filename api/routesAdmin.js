@@ -33,6 +33,7 @@ routerAdmin.post('/delete', async (req, res) => {
         console.log(req)
         //get id foto di drive + delete
         let returned = await gownCtrl.apiCheckId(req, res)
+        console.log(returned);
         let drive = returned.gown[0].drive;
         for (let i = 0; i < drive.length; i++) {
             await deleteFromDrive(drive[i]); //delete
