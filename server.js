@@ -43,6 +43,10 @@ app.get('/', function (req, res) {
 	res.sendFile(indexPath);
 });
 
+app.get('/tambah', function (req, res) {
+	res.sendFile(indexPath);
+});
+
 import RoutesApi from "./api/routesApi.js"
 import RoutesAdmin from "./api/routesAdmin.js"
 
