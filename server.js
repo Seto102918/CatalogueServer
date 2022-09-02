@@ -23,6 +23,8 @@ app.use(express.json());
 app.use(compression());
 app.use(express.urlencoded({ extended: true }))
 
+const indexPath = path.join(__dirname, 'build', 'index.html');
+
 app.use(express.static(path.join(__dirname, 'build'), {
 	etag: true,
 	lastModified: true,
@@ -37,10 +39,14 @@ app.use(express.static(path.join(__dirname, 'build'), {
 	},
 }));
 
+app.get('/*', function (req, res) {
+	res.sendFile(indexPath);
+});
+
 import RoutesApi from "./api/routesApi.js"
 import RoutesAdmin from "./api/routesAdmin.js"
 
-const indexPath = path.join(__dirname, 'build', 'index.html');
+
 
 app.use("/api/", RoutesApi)
 app.use("/admin/", RoutesAdmin)
