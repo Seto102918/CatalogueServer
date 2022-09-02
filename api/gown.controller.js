@@ -1,5 +1,6 @@
 import gownDAO from "../dao/gownDAO.js"
-
+import deleteFromDrive from "./delete.js"
+import uploadFile from "./upload.js"
 export default class gownController {
     static async apiGetGown(req, res, next) {
         const gownPerPage = req.query.gownPerPage ? parseInt(req.query.gownPerPage, 10) : 20
