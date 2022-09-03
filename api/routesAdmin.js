@@ -21,7 +21,7 @@ routerAdmin.post('/upload', upload.any(), async (req, res) => {
         console.log(files)
         const IdArray = [];
         for (let i = 0; i < files.length; i++) {
-            const Id = await uploadFile(files[i], body.kode, i);
+            const Id = await uploadFile(files[i], body.kode, i, res);
             IdArray.push(Id);
         }
         gownController.apiAddGaun(req, res, IdArray);

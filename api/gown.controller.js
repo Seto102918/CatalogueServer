@@ -88,7 +88,7 @@ export default class gownController {
         res.json(listWarna);
     }
 
-    static async apiEditGaun(req, res, gownRef, drive) {
+    static async apiEditGaun(req, res) {
         try {
             console.log(req.body)
             const { body, files } = req;
@@ -110,11 +110,11 @@ export default class gownController {
             for (let i = 0; i < changeArray.length; i++) {
                 const changeIndex = changeArray[i].fieldname[changeArray[i].fieldname.length - 1];
                 await deleteFromDrive(drive[changeIndex]); //delete
-                const Id = await uploadFile(changeArray[i], body.kode, changeIndex); //upload
+                const Id = await uploadFile(changeArray[i], body.kode, changeIndex, res); //upload
                 drive[changeIndex] = Id;
             }
             for (let i = 0; i < addArray.length; i++) {
-                const Id = await uploadFile(addArray[i], body.kode, i + drive.length);
+                const Id = await uploadFile(addArray[i], body.kode, i + drive.length, res);
                 drive.push(Id);
             }
 
