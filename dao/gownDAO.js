@@ -155,7 +155,7 @@ export default class gownDAO {
 
 			if (inDatabase[0].warna !== warna && warna !== "") obj.warna = warna;
 
-			if (inDatabase[0].harga !== harga && harga !== "") obj.harga = harga;
+			if (inDatabase[0].harga !== harga && harga !== "" && !isNaN(harga)) obj.harga = harga;
 
 			if (inDatabase[0].favorit !== favorit) obj.favorit = favorit;
 
