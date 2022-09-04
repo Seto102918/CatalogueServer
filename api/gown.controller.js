@@ -4,7 +4,6 @@ import uploadFile from "./upload.js"
 export default class gownController {
     static async apiGetGown(req, res, next) {
         const gownPerPage = req.query.gownPerPage ? parseInt(req.query.gownPerPage, 10) : 20
-        console.log(gownPerPage)
         const page = req.query.page ? parseInt(req.query.page, 10) : 0
         const sort = req.query.sort;
         const kategori = req.query.kategori;

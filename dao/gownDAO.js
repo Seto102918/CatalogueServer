@@ -46,6 +46,8 @@ export default class gownDAO {
 		let query = (filterArray === undefined || filterArray.length == 0) ? undefined : { $and: filterArray }
 		let cursor;
 
+		console.log("query: " + query);
+
 		try {
 			cursor = await gown.find(query).sort(sortBy);
 		} catch (e) {
@@ -53,7 +55,6 @@ export default class gownDAO {
 			return { gownList: [], totalNumgown: 0 }
 		}
 
-		console.log(gownPerPage)
 		const displayCursor = cursor.limit(gownPerPage).skip(gownPerPage * page)
 
 		try {
