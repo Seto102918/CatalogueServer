@@ -174,7 +174,8 @@ export default class gownDAO {
 		try {
 			let cursor = await gown.find({ "kode": { $eq: kode } });
 			let gownSearched = await cursor.toArray();
-			console.log("gownSearched: " + gownSearched);
+			console.log("gownSearched: ");
+			console.log(gownSearched);
 			return { gown: gownSearched }
 		} catch (e) {
 			console.error(`Unable to check ID: ${e}`)

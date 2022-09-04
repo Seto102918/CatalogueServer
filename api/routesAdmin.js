@@ -49,7 +49,7 @@ routerAdmin.post('/delete', async (req, res) => {
 
         if (isNaN(returned.gown[0])) {
             console.log("Cant Find Data");
-            return res.send("Cant Find Data");
+            return res.status(404).send("Cant Find Data");
         }
 
         let drive = returned.gown[0].drive;
