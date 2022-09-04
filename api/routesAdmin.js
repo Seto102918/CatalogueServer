@@ -21,9 +21,9 @@ routerAdmin.post('/upload', upload.any(), async (req, res) => {
         const { body, files } = req;
         console.log(files)
         //Check Udh ada ato kgk
-        const returned = gownController.apiCheckId(req, res);
+        const returned = await gownController.apiCheckId(req, res);
 
-        console.log('returned: ');
+        console.log('returned:');
         console.log(returned)
 
         const IdArray = [];
