@@ -99,16 +99,24 @@ export default class gownController {
 
             // Check ID Input VS InDatabase
             let returned = await gownDAO.checkId(req.body.kode);
+
+            if (isNaN(returned.gown[0])) {
+                console.log("Cant Find Data");
+                return res.send("Cant Find Data");
+            }
+
             let drive = returned.gown[0].drive;
 
             // delete dari drive terus ganti sm yang baru
             for (let i = 0; i < changeArray.length; i++) {
+                console.log("Updating Photo " + i + "...");
                 const changeIndex = changeArray[i].fieldname[changeArray[i].fieldname.length - 1];
                 await deleteFromDrive(drive[changeIndex]); //delete
                 const Id = await uploadFile(changeArray[i], body.kode, changeIndex, res); //upload
                 drive[changeIndex] = Id;
             }
             for (let i = 0; i < addArray.length; i++) {
+                console.log("uploading Addition Photo " + i + "...");
                 const Id = await uploadFile(addArray[i], body.kode, i + drive.length, res);
                 drive.push(Id);
             }

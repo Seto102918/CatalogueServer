@@ -20,9 +20,17 @@ routerAdmin.post('/upload', upload.any(), async (req, res) => {
         console.log("add to Data...");
         const { body, files } = req;
         console.log(files)
+        //Check Udh ada ato kgk
+        const returned = gownController.apiCheckId(req, res);
+
+        if (!isNaN(returned.gown[0])) {
+            console.log("Data Exists");
+            return res.send("Data Exists");
+        }
+
         const IdArray = [];
         for (let i = 0; i < files.length; i++) {
-            console.log("uploading Photo" + i + "...");
+            console.log("uploading Photo " + i + "...");
             const Id = await uploadFile(files[i], body.kode, i, res);
             IdArray.push(Id);
         }
