@@ -25,6 +25,12 @@ routerAdmin.post('/upload', upload.any(), async (req, res) => {
 
         console.log('returned:');
         console.log(returned)
+        console.log(returned.gown.length === 0)
+
+        if(!returned.gown.length === 0){
+            console.log('Data already Exists');
+            res.status(400).send("Data already Exists");
+        }
 
         const IdArray = [];
         for (let i = 0; i < files.length; i++) {
