@@ -23,9 +23,9 @@ routerAdmin.post('/upload', upload.any(), async (req, res) => {
         //Check Udh ada ato kgk
         const returned = gownController.apiCheckId(req, res);
 
-        if (!isNaN(returned.gown[0])) {
-            console.log("Data Exists");
-            return res.send("Data Exists");
+        if (returned.gown[0]) {
+            console.log("Data Already Exists");
+            return res.status(400).send("Data Already Exists");
         }
 
         const IdArray = [];
@@ -47,7 +47,7 @@ routerAdmin.post('/delete', async (req, res) => {
 
         console.log("returned: " + JSON.stringify(returned));
 
-        if (isNaN(returned.gown[0])) {
+        if (!returned.gown[0]) {
             console.log("Cant Find Data");
             return res.status(404).send("Cant Find Data");
         }
