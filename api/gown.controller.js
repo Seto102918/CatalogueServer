@@ -83,11 +83,6 @@ export default class gownController {
         }
     }
 
-    static async apiGetGownListColor(req, res) {
-        const listWarna = await gownDAO.getListWarna();
-        res.json(listWarna);
-    }
-
     static async apiEditGaun(req, res) {
         try {
             console.log(req.body)
@@ -141,7 +136,7 @@ export default class gownController {
 
     static async apiCheckId(req, res) {
         try {
-            console.log("req.body.kode" + req.body.kode);
+            console.log("req.body.kode: " + req.body.kode);
             const Response = await gownDAO.checkId(req.body.kode);
             return Response
         } catch (e) {

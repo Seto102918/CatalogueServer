@@ -183,6 +183,7 @@ export default class gownDAO {
 
 	static async delete(Id) {
 		try {
+			console.log('Deleting:' +  Id)
 			await gown.deleteOne({ "_id": ObjectId(Id) });
 		} catch (e) {
 			console.error(`Unable to delete Data: ${e}`)

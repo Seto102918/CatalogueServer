@@ -30,10 +30,10 @@ routerAdmin.post('/upload', upload.any(), async (req, res) => {
 
 routerAdmin.post('/delete', async (req, res) => {
     try {
-        console.log(req)
+        console.log(req.body)
         //get id foto di drive + delete
         let returned = await gownController.apiCheckId(req, res)
-        console.log(returned);
+        console.log("returned: " + returned);
         let drive = returned.gown[0].drive;
         for (let i = 0; i < drive.length; i++) {
             await deleteFromDrive(drive[i]); //delete
