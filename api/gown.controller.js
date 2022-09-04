@@ -99,6 +99,8 @@ export default class gownController {
             // Check ID Input VS InDatabase
             let returned = await gownDAO.checkId(req.body.kode);
 
+            console.log(returned.gown[0])
+            
             if (isNaN(returned.gown[0])) {
                 console.log("Cant Find Data");
                 return res.status(404).send("Cant Find Data");
