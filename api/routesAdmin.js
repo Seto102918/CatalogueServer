@@ -35,9 +35,14 @@ routerAdmin.post('/delete', async (req, res) => {
         console.log("deleting Data...");
         console.log(req.body)
         //get id foto di drive + delete
-        let returned = await gownController.apiCheckId(req, res)
+        let returned = await gownController.apiCheckId(req, res);
 
-        console.log("returned: " + returned);
+        console.log("returned: " + JSON.stringify(returned));
+
+        if (isNaN(returned.gown[0])) {
+            console.log("Cant Find Data");
+            return res.send("Cant Find Data");
+        }
 
         let drive = returned.gown[0].drive;
         for (let i = 0; i < drive.length; i++) {
