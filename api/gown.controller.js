@@ -100,7 +100,7 @@ export default class gownController {
             let returned = await gownDAO.checkId(req.body.kode);
 
             console.log(returned.gown[0]._id);
-            console.log(isNaN(returned.gown[0]._id));
+            console.log(returned.gown[0] ? true : false);
 
             if (isNaN(returned.gown[0])) {
                 console.log("Cant Find Data");
