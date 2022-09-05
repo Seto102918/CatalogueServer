@@ -78,7 +78,7 @@ export default class gownController {
 
             res.json({ status: "success", res: GaunResponse })
         } catch (e) {
-            res.status(500).json({ error: e.message })
+            throw e;
         }
     }
 
@@ -147,7 +147,8 @@ export default class gownController {
             const Response = await gownDAO.checkId(req.body.kode);
             return Response
         } catch (e) {
-            res.status(500).json({ error: e.message })
+            console.log(e);
+            throw e;
         }
     }
 
@@ -156,6 +157,7 @@ export default class gownController {
             const Response = await gownDAO.delete(req.body.id);
             return Response
         } catch (e) {
+            console.log(e);
             res.status(500).json({ error: e.message })
         }
     }

@@ -20,17 +20,13 @@ routerAdmin.post('/upload', upload.any(), async (req, res) => {
         console.log("add to Data...");
         const { body, files } = req;
         console.log(files)
-        // //Check Udh ada ato kgk
-        // const returned = await gownController.apiCheckId(req, res);
+        //Check Udh ada ato kgk
+        const returned = await gownController.apiCheckId(req, res);
 
-        // console.log('returned:');
-        // console.log(returned);
-        // console.log(returned.gown.length);
-
-        // if(returned.gown.length >= 0){
-        //     console.log('Data already Exists');
-        //     return res.status(400).send("Data already Exists");
-        // }
+        if(returned.gown.length >= 0){
+            console.log('Data already Exists');
+            return res.status(400).send("Data already Exists");
+        }
 
         const urlArray = [];
         for (let i = 0; i < files.length; i++) {
@@ -39,7 +35,10 @@ routerAdmin.post('/upload', upload.any(), async (req, res) => {
             urlArray.push(url);
         }
         gownController.apiAddGaun(req, res, urlArray);
-    } catch (err) { res.send(err.message); }
+    } catch (err) { 
+        console.log(err);
+        res.status(500).send(err.message); 
+    }
 });
 
 routerAdmin.post('/delete', async (req, res) => {
@@ -64,7 +63,7 @@ routerAdmin.post('/delete', async (req, res) => {
         res.sendStatus(200);
     } catch (err) {
         console.log(err)
-        res.status(400).send(err.message);
+        res.status(500).send(err.message);
     }
 })
 
