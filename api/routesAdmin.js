@@ -26,7 +26,7 @@ routerAdmin.post('/upload', upload.any(), async (req, res) => {
         console.log("returned")
         console.log(returned)
 
-        if(returned.gown.kode){
+        if(returned.gown.length > 0){
             console.log('Data already Exists');
             return res.status(400).send("Data already Exists");
         }
