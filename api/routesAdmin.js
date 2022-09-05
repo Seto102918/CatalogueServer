@@ -23,7 +23,10 @@ routerAdmin.post('/upload', upload.any(), async (req, res) => {
         //Check Udh ada ato kgk
         const returned = await gownController.apiCheckId(req, res);
 
-        if(returned.gown.length >= 0){
+        console.log("returned")
+        console.log(returned)
+
+        if(returned.gown.kode){
             console.log('Data already Exists');
             return res.status(400).send("Data already Exists");
         }
