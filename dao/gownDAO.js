@@ -128,7 +128,7 @@ export default class gownDAO {
 		}
 	}
 
-	static async addGaun(kode, warna, harga, favorit, kategori, drive) {
+	static async addGaun(kode, warna, harga, favorit, kategori, urlArray) {
 		try {
 			const reviewDoc = {
 				kode: kode,
@@ -136,7 +136,7 @@ export default class gownDAO {
 				harga: harga,
 				favorit: favorit,
 				kategori: kategori,
-				drive: drive,
+				urlArray: urlArray,
 				_id: new ObjectId(),
 			}
 
@@ -147,11 +147,11 @@ export default class gownDAO {
 		}
 	}
 
-	static async editGaun(kode, warna, harga, favorit, drive, inDatabase) {
+	static async editGaun(kode, warna, harga, favorit, urlArray, inDatabase) {
 		try {
 			const filter = { kode: kode };
 			const options = { upsert: true };
-			const obj = { drive: drive };
+			const obj = { urlArray: urlArray };
 
 			if (inDatabase[0].warna !== warna && warna !== "") obj.warna = warna;
 

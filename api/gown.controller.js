@@ -1,5 +1,5 @@
 import gownDAO from "../dao/gownDAO.js"
-import deleteFromDrive from "./delete.js"
+import deleteFile from "./delete.js"
 import uploadFile from "./upload.js"
 export default class gownController {
     static async apiGetGown(req, res, next) {
@@ -58,7 +58,7 @@ export default class gownController {
         }
     }
 
-    static async apiAddGaun(req, res, drive) {
+    static async apiAddGaun(req, res, urlArray) {
         try {
             const kode = req.body.kode;
             const warna = req.body.warna;
@@ -73,12 +73,12 @@ export default class gownController {
                 harga,
                 favorit,
                 kategori,
-                drive
+                urlArray
             )
 
             res.json({ status: "success", res: GaunResponse })
         } catch (e) {
-            res.json({ error: e.message })
+            res.status(500).json({ error: e.message })
         }
     }
 
@@ -104,20 +104,20 @@ export default class gownController {
                 return res.status(404).send("Cant Find Data");
             }
 
-            let drive = returned.gown[0].drive;
+            let urlArray = returned.gown[0].urlArray;
 
-            // delete dari drive terus ganti sm yang baru
+            // delete dari urlArray terus ganti sm yang baru
             for (let i = 0; i < changeArray.length; i++) {
                 console.log("Updating Photo " + i + "...");
                 const changeIndex = changeArray[i].fieldname[changeArray[i].fieldname.length - 1];
-                await deleteFromDrive(drive[changeIndex]); //delete
+                await deleteFile(`${req.body.kode}/${req.body.kode}_${changeIndex}.webp`); //delete
                 const Id = await uploadFile(changeArray[i], body.kode, changeIndex, res); //upload
-                drive[changeIndex] = Id;
+                urlArray[changeIndex] = Id;
             }
             for (let i = 0; i < addArray.length; i++) {
                 console.log("uploading Addition Photo " + i + "...");
-                const Id = await uploadFile(addArray[i], body.kode, i + drive.length, res);
-                drive.push(Id);
+                const Id = await uploadFile(addArray[i], body.kode, i + urlArray.length, res);
+                urlArray.push(Id);
             }
 
             const kode = req.body.kode;
@@ -130,7 +130,7 @@ export default class gownController {
                 warna,
                 harga,
                 favorit,
-                drive,
+                urlArray,
                 returned.gown
             );
 

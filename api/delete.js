@@ -1,18 +1,9 @@
-import getDriveService from './service.js'
+import { getStorage } from "firebase-admin/storage";
+import { firebase_foto } from "./service.js";
 
-const deleteFromDrive = async(fileId) => {
-    const drive = await getDriveService();
-
-    drive.files.delete({
-      fileId: fileId,
-    }).then(
-      async function (){
-        return { status: 'success' }
-      },
-      function (err) {
-        return { errors: [{ msg: err }] };
-      }
-    );
+const deleteFile = async(fileLocation) => {
+  const bucket = getStorage(firebase_foto).bucket();
+  await bucket.file(fileLocation).delete();
 }
 
-export default deleteFromDrive;
+export default deleteFile;

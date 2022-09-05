@@ -1,16 +1,21 @@
-import { google } from 'googleapis'
-import path from 'path'
+import { initializeApp, cert } from 'firebase-admin/app';
 
-const getDriveService = () => {
-    const KEYFILEPATH = path.basename('tough-totem-359408-36d1b3ad6f81.json');
-    const SCOPES = ['https://www.googleapis.com/auth/drive'];
+import serviceAcc_Foto from '../fotobridal-83326-firebase-adminsdk-3j2tu-0b2b6a4729.json'assert { type: 'json' };
+import serviceAcc_Main from '../dsista-bridal-firebase-adminsdk-ocz1k-717f9775c7.json'assert { type: 'json' };
 
-    const auth = new google.auth.GoogleAuth({
-        keyFile: KEYFILEPATH,
-        scopes: SCOPES,
-    });
-    const driveService = google.drive({ version: 'v3', auth });
-    return driveService;
-};
+var firebase_foto = initializeApp(
+    {
+      credential: cert(serviceAcc_Foto),
+      storageBucket: 'gs://fotobridal-83326.appspot.com'
+    }, 
+    'kedua' 
+)
 
-export default getDriveService;
+var firebase_main = initializeApp(
+    {
+      credential: cert(serviceAcc_Main),
+    }, 
+    'pertama' 
+)
+
+export { firebase_main , firebase_foto };
