@@ -129,19 +129,22 @@ export default class gownController {
             let urlArray = returned.gown[0].urlArray;
 
             // delete dari urlArray terus ganti sm yang baru
-            for (let i = 0; i < changeArray.length; i++) {
-                console.log("Updating Photo " + i + "...");
-                const changeIndex = changeArray[i].fieldname[changeArray[i].fieldname.length - 1];
-                await deleteFile(`${req.body.kode}/${req.body.kode}_${changeIndex}.webp`); //delete
-                const Id = await uploadFile(changeArray[i], body.kode, changeIndex, res); //upload
-                urlArray[changeIndex] = Id;
-            }
-            for (let i = 0; i <= addArray.length; i++) {
-                console.log("uploading Addition Photo " + i + "...");
-                const Id = await uploadFile(addArray[i], body.kode, i + urlArray.length, res);
-                urlArray.push(Id);
-            }
+            if(changeArray.length > 0)
+                for (let i = 0; i < changeArray.length; i++) {
+                    console.log("Updating Photo " + i + "...");
+                    const changeIndex = changeArray[i].fieldname[changeArray[i].fieldname.length - 1];
+                    await deleteFile(`${req.body.kode}/${req.body.kode}_${changeIndex}.webp`); //delete
+                    const Id = await uploadFile(changeArray[i], body.kode, changeIndex, res); //upload
+                    urlArray[changeIndex] = Id;
+                }
 
+            if(addArray.length > 0) 
+                for (let i = 0; i <= addArray.length; i++) {
+                    console.log("uploading Addition Photo " + i + "...");
+                    const Id = await uploadFile(addArray[i], body.kode, i + urlArray.length, res);
+                    urlArray.push(Id);
+                }
+                
             const kode = req.body.kode;
             const warna = req.body.warna;
             const harga = parseInt(req.body.harga);
