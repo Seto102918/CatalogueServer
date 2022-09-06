@@ -60,12 +60,32 @@ export default class gownController {
 
     static async apiAddGaun(req, res, urlArray) {
         try {
-            const kode = req.body.kode;
-            const warna = req.body.warna;
-            const harga = parseInt(req.body.harga);
-            const kategori = req.body.kategori;
+            console.log("add to Data...");
+            const { body, files } = req;
+            console.log(files)
 
-            const favorit = req.body.favorit == "true" ? true : false
+            //Check Udh ada ato kgk
+            const returned = await gownController.apiCheckId(req, res);
+            console.log("returned");
+            console.log(returned);
+
+            if(returned.gown.length > 0){
+                console.log('Data already Exists');
+                return res.status(400).send("Data already Exists");
+            }
+
+            const urlArray = [];
+            for (let i = 0; i < files.length; i++) {
+                console.log("uploading Photo " + i + "...");
+                const url = await uploadFile(files[i], body.kode, i, res);
+                urlArray.push(url);
+            }
+
+            const kode = body.kode;
+            const warna = body.warna;
+            const harga = parseInt(body.harga);
+            const kategori = body.kategori;
+            const favorit = body.favorit == "true" ? true : false
 
             const GaunResponse = await gownDAO.addGaun(
                 kode,
@@ -76,14 +96,16 @@ export default class gownController {
                 urlArray
             )
 
-            res.json({ status: "success", res: GaunResponse })
+            res.json({ status: "success", res: GaunResponse });
         } catch (e) {
-            throw e;
+            console.log(e.message);
+            res.status(500).json({ error: e.message });
         }
     }
 
     static async apiEditGaun(req, res) {
         try {
+            console.log("editing Data...");
             console.log(req.body)
             const { body, files } = req;
 
@@ -105,7 +127,7 @@ export default class gownController {
             }
 
             let urlArray = returned.gown[0].urlArray;
-
+            
             // delete dari urlArray terus ganti sm yang baru
             for (let i = 0; i < changeArray.length; i++) {
                 console.log("Updating Photo " + i + "...");
@@ -154,11 +176,29 @@ export default class gownController {
 
     static async apiDelete(req, res) {
         try {
-            const Response = await gownDAO.delete(req.body.id);
-            return Response
+            console.log("deleting Data...");
+            console.log(req.body)
+
+            //get id foto di urlArray + delete
+            let returned = await gownController.apiCheckId(req, res);
+
+            console.log("returned: " + JSON.stringify(returned));
+
+            if (!returned.gown[0]) {
+                console.log("Cant Find Data");
+                return res.status(404).send("Cant Find Data");
+            }
+
+            let urlArray = returned.gown[0].urlArray;
+            for (let i = 0; i < urlArray.length; i++) {
+                await deleteFile(`${req.body.kode}/${req.body.kode}_${i}.webp`); //delete
+            }
+            await gownDAO.delete(req.body.id);
+
+            return res.sendStatus(200);
         } catch (e) {
-            console.log(e);
-            res.status(500).json({ error: e.message })
+            console.log(err)
+            res.status(500).send(err.message);
         }
     }
 }
