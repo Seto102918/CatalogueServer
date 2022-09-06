@@ -47,7 +47,7 @@ app.get('/tambah', function (req, res) {
 	res.sendFile(indexPath);
 });
 
-app.get('/id/*', function (req, res) {
+app.get('/edit/*', function (req, res) {
 	res.sendFile(indexPath);
 });
 

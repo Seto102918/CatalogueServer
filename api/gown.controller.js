@@ -136,7 +136,7 @@ export default class gownController {
                 const Id = await uploadFile(changeArray[i], body.kode, changeIndex, res); //upload
                 urlArray[changeIndex] = Id;
             }
-            for (let i = 0; i < addArray.length; i++) {
+            for (let i = 0; i <= addArray.length; i++) {
                 console.log("uploading Addition Photo " + i + "...");
                 const Id = await uploadFile(addArray[i], body.kode, i + urlArray.length, res);
                 urlArray.push(Id);
