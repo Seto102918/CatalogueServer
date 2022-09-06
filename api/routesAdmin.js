@@ -8,7 +8,7 @@ const routerAdmin = express.Router();
 /* Edit From Admin Site */
 routerAdmin.post('/edit', upload.any(), async (req, res) => gownController.apiEditGaun(req, res));
 
-routerAdmin.post('/upload', upload.any(), async (req, res) => gownController.apiAddGaun(req, res, urlArray));
+routerAdmin.post('/upload', upload.any(), async (req, res) => gownController.apiAddGaun(req, res));
 
 routerAdmin.post('/delete', async (req, res) => gownController.apiDelete(req, res));
 
