@@ -121,13 +121,13 @@ export default class gownController {
             // Check ID Input VS InDatabase
             let returned = await gownDAO.checkId(req.body.kode);
 
-            if (returned.gown.length > 0) {
+            if (returned.gown.length == 0) {
                 console.log("Cant Find Data");
                 return res.status(404).send("Cant Find Data");
             }
 
             let urlArray = returned.gown[0].urlArray;
-            
+
             // delete dari urlArray terus ganti sm yang baru
             for (let i = 0; i < changeArray.length; i++) {
                 console.log("Updating Photo " + i + "...");
@@ -184,7 +184,7 @@ export default class gownController {
 
             console.log("returned: " + JSON.stringify(returned));
 
-            if (!returned.gown[0]) {
+            if (returned.gown.length == 0) {
                 console.log("Cant Find Data");
                 return res.status(404).send("Cant Find Data");
             }
@@ -197,8 +197,8 @@ export default class gownController {
 
             return res.sendStatus(200);
         } catch (e) {
-            console.log(err)
-            res.status(500).send(err.message);
+            console.log(e)
+            res.status(500).send(e.message);
         }
     }
 }
