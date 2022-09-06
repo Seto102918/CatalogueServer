@@ -191,10 +191,10 @@ export default class gownController {
 
             let urlArray = returned.gown[0].urlArray;
             for (let i = 0; i < urlArray.length; i++) {
+                if(urlArray[i] == null || isNaN(urlArray[i])) return res.status(500).send("urlArray contains null or isNaN");
                 await deleteFile(`${req.body.kode}/${req.body.kode}_${i}.webp`); //delete
             }
             await gownDAO.delete(req.body.id);
-
             return res.sendStatus(200);
         } catch (e) {
             console.log(e)

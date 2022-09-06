@@ -22,16 +22,16 @@ const uploadFile = async (fileObject, kodeFoto, indexFoto, res) => {
                     console.log('Uploaded photo' + indexFoto);
                     return `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${kodeFoto}%2F${kodeFoto}_${indexFoto}.webp?alt=media`;
                 })
-                .catch(err => { 
-                    console.log(err) 
+                .catch(e => { 
+                    console.log(e);
+                    throw e;
                 });
-                return url;
             })
             .catch(err => { 
                 console.log(err);
                 return res.status(500).send(e);
             });
-        return url
+        return url;
     }catch(e){
         console.log(e)
         throw e;
