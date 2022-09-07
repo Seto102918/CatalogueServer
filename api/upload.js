@@ -3,6 +3,7 @@ import stream from 'stream';
 import { firebase_foto } from "./service.js";
 import { getStorage } from 'firebase-admin/storage';
 import * as fs from "fs";
+import e from "express";
 
 const uploadFile = async (fileObject, kodeFoto, indexFoto, res) => {
     try{
@@ -27,9 +28,9 @@ const uploadFile = async (fileObject, kodeFoto, indexFoto, res) => {
                     throw e;
                 });
             })
-            .catch(err => { 
-                console.log(err);
-                return res.status(500).send(e);
+            .catch(e => { 
+                console.log(e);
+                throw e;
             });
         return `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${kodeFoto}%2F${kodeFoto}_${indexFoto}.webp?alt=media`;
     }catch(e){

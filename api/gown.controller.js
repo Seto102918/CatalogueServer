@@ -106,8 +106,8 @@ export default class gownController {
     static async apiEditGaun(req, res) {
         try {
             console.log("editing Data...");
-            console.log(req.body)
             const { body, files } = req;
+            console.log(files)
 
             // Pisahin Add sm Change
             let addArray = [];
@@ -137,8 +137,9 @@ export default class gownController {
                     const Id = await uploadFile(changeArray[i], body.kode, changeIndex, res); //upload
                     urlArray[changeIndex] = Id;
                 }
-
+            
             if(addArray.length > 0) 
+                console.log(addArray)
                 for (let i = 0; i <= addArray.length; i++) {
                     console.log("uploading Addition Photo " + i + "...");
                     console.log(addArray[i])
