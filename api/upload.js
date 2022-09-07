@@ -31,6 +31,7 @@ const uploadFile = async (fileObject, kodeFoto, indexFoto, res) => {
                 console.log(err);
                 return res.status(500).send(e);
             });
+        console.log(url)
         return url;
     }catch(e){
         console.log(e)
