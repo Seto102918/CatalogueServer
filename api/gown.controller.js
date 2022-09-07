@@ -134,17 +134,17 @@ export default class gownController {
                     console.log("Updating Photo " + i + "...");
                     const changeIndex = changeArray[i].fieldname[changeArray[i].fieldname.length - 1];
                     await deleteFile(`${req.body.kode}/${req.body.kode}_${changeIndex}.webp`); //delete
-                    const Id = await uploadFile(changeArray[i], body.kode, changeIndex, res); //upload
-                    urlArray[changeIndex] = Id;
+                    const newUrl = await uploadFile(changeArray[i], body.kode, changeIndex, res); //upload
+                    urlArray[changeIndex] = newUrl;
                 }
             
             if(addArray.length > 0) 
                 console.log(addArray)
-                for (let i = 0; i <= addArray.length; i++) {
+                for (let i = 0; i < addArray.length; i++) {
                     console.log("uploading Addition Photo " + i + "...");
                     console.log(addArray[i])
-                    const Id = await uploadFile(addArray[i], body.kode, i + urlArray.length, res);
-                    urlArray.push(Id);
+                    const newUrl = await uploadFile(addArray[i], body.kode, i + urlArray.length, res);
+                    urlArray.push(newUrl);  
                 }
                 
             const kode = req.body.kode;
