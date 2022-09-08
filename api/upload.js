@@ -45,8 +45,8 @@ export const uploadThumbnail = async (fileObject, kodeFoto) => {
         const bucket = getStorage(firebase_foto).bucket();
         const url = await sharp(fileObject.buffer)
             .resize({
-                width: 600,
-                height: 800
+                width: 300,
+                height: 400
             })
             .webp()
             .toBuffer()
