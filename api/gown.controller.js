@@ -1,6 +1,6 @@
 import gownDAO from "../dao/gownDAO.js"
 import deleteFile from "./delete.js"
-import uploadFile from "./upload.js"
+import uploadFile, { uploadThumbnail } from "./upload.js"
 export default class gownController {
     static async apiGetGown(req, res, next) {
         const gownPerPage = req.query.gownPerPage ? parseInt(req.query.gownPerPage, 10) : 20
@@ -74,6 +74,12 @@ export default class gownController {
                 return res.status(400).send("Data already Exists");
             }
 
+            // Upload Thumbnail preview image
+
+            await uploadThumbnail(files[0], body.kode);
+
+            // upload images
+
             const urlArray = [];
             for (let i = 0; i < files.length; i++) {
                 console.log("uploading Photo " + i + "...");
@@ -134,6 +140,10 @@ export default class gownController {
                     console.log("Updating Photo " + i + "...");
                     const changeIndex = changeArray[i].fieldname[changeArray[i].fieldname.length - 1];
                     await deleteFile(`${req.body.kode}/${req.body.kode}_${changeIndex}.webp`); //delete
+                    if(changeIndex == 0) {
+                        await deleteFile(`${req.body.kode}/${req.body.kode}_preview.webp`) // delete thumnail photo
+                        await uploadThumbnail(changeArray[0], body.kode) //upload new thumbnail
+                    }
                     const newUrl = await uploadFile(changeArray[i], body.kode, changeIndex, res); //upload
                     urlArray[changeIndex] = newUrl;
                 }
@@ -197,8 +207,10 @@ export default class gownController {
             let urlArray = returned.gown[0].urlArray;
             for (let i = 0; i < urlArray.length; i++) {
                 console.log("deleting photo " + i);
-                if(!urlArray[i] == null || !isNaN(urlArray[i])) 
-                await deleteFile(`${req.body.kode}/${req.body.kode}_${i}.webp`); //delete
+                if(!urlArray[i] == null || !isNaN(urlArray[i])){
+                    await deleteFile(`${req.body.kode}/${req.body.kode}_${i}.webp`); //delete
+                    await deleteFile(`${req.body.kode}/${req.body.kode}_preview.webp`) // delete thumbnail
+                }
             }
             await gownDAO.delete(req.body.id);
             return res.sendStatus(200);

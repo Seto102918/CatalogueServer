@@ -40,4 +40,41 @@ const uploadFile = async (fileObject, kodeFoto, indexFoto, res) => {
     
 };
 
+export const uploadThumbnail = async (fileObject, kodeFoto) => {
+    try{
+        const bucket = getStorage(firebase_foto).bucket();
+        const url = await sharp(fileObject.buffer)
+            .resize({
+                width: 600,
+                height: 800
+            })
+            .webp()
+            .toBuffer()
+            .then(async(data) => {
+                console.log("start Uploading preview");
+                console.log(data)
+                const url = await bucket.file(`${kodeFoto}/${kodeFoto}_preview.webp`).save(data, { 
+                    metadata: { 
+                      contentType: 'image/webp' 
+                    } 
+                })
+                .then(() => {
+                    console.log('Uploaded photo preview');
+                    
+                })
+                .catch(e => { 
+                    console.log(e);
+                    throw e;
+                });
+            })
+            .catch(e => { 
+                console.log(e);
+                throw e;
+            });
+    }catch(e){
+        console.log(e)
+        throw e;
+    }
+}
+
 export default uploadFile;
