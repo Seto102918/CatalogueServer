@@ -42,27 +42,29 @@ Frontendnya yang dibuat ada dua:
     https://docs.cyclic.sh/overview/limits
 
 # API links
-    - All gown data (https://dlux-test.cyclic.app/api/v1/gown)
-        - queries
-            - kategori (wedding_gown, )
-            - warna
-            - page
-            - sort (A2Z, Z2A, H2L, L2H, FVR, WRN)
-            - gownPerPage
+- All gown data (https://dlux-test.cyclic.app/api/v1/gown)
 
-        example: https://dlux-test.cyclic.app/api/v1/gown?kategori=wedding_gown&sort=A2Z&warna=Merah&page=0&gownPerPage=1
+    Example: https://dlux-test.cyclic.app/api/v1/gown?kategori=wedding_gown&sort=A2Z&warna=Merah&page=0&gownPerPage=1
+  - queries
+    - kategori (wedding_gown, )
+    - warna
+    - page
+    - sort (A2Z, Z2A, H2L, L2H, FVR, WRN)
+    - gownPerPage
     
-    - One specific gown by Object Id and giving recommended gowns by color (https://dlux-test.cyclic.app/api/v1/gown/id/:id)
+    
+    
+- One specific gown by Object Id and giving recommended gowns by color (https://dlux-test.cyclic.app/api/v1/gown/id/:id)
 
-        example: https://dlux-test.cyclic.app/api/v1/gown/id/63354b1599cfdbf2e68c1dfd
+    Example: https://dlux-test.cyclic.app/api/v1/gown/id/63354b1599cfdbf2e68c1dfd
 
-    - also One specific gown by it's code and giving recommended gowns by color (https://dlux-test.cyclic.app/api/v1/gown/kode/:kode)
+- Also One specific gown by it's code and giving recommended gowns by color (https://dlux-test.cyclic.app/api/v1/gown/kode/:kode)
 
-        example: https://dlux-test.cyclic.app/api/v1/gown/kode/WG1
+    Example: https://dlux-test.cyclic.app/api/v1/gown/kode/WG1
 
 
 # Little Demo By Using The Admin Frontend
-    
+    https://drive.google.com/file/d/1DwmQ_aEmNfSOZdj_8k1E3H3vOFSUnFYU/view?usp=sharing
 
 
 
