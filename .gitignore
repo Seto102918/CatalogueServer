@@ -1,5 +1,9 @@
-admin
 .env
 prevbuild
 fotobridal-83326-firebase-adminsdk-3j2tu-0b2b6a4729.json
 dsista-bridal-firebase-adminsdk-ocz1k-717f9775c7.json
+coverage
+unused
+test
+client
+node_modules
