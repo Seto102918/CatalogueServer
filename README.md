@@ -47,7 +47,7 @@ Frontendnya yang dibuat ada dua:
 
     Example: https://dlux-test.cyclic.app/api/v1/gown?kategori=wedding_gown&sort=A2Z&warna=Merah&page=0&gownPerPage=1
   - queries
-    - kategori (wedding_gown, )
+    - kategori
     - warna
     - page
     - sort (A2Z, Z2A, H2L, L2H, FVR, WRN)
