@@ -17,6 +17,7 @@ Frontendnya yang dibuat ada dua:
     - Express
   - MongoDB Atlas
   - Firebase Storage
+  - JWT
 
 
 # Catatan Limitasi Supaya Gratis
